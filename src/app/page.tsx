@@ -8,7 +8,7 @@ import TransactionsTable from '@/components/Transactions';
 import Infos from '@/components/Infos';
 import { hooks as metaMaskHooks, metaMask } from '../utils/web3Connectors';
 
-const apiKey = "MNINI6SBHZ3GJ8PDUBTCXU5NMEU87SJYAF";
+const apiKey = process.env.API_KEY;
 const { useChainId, useAccounts, useIsActivating, useIsActive, useProvider, useENSNames } = metaMaskHooks;
 
 export default function Home() {

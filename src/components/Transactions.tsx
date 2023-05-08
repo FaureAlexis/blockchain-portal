@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import axios, { AxiosResponse } from "axios";
 import { useState, useEffect } from "react";
-const apiKey = "MNINI6SBHZ3GJ8PDUBTCXU5NMEU87SJYAF";
+const apiKey = process.env.API_KEY;
 
 interface Transaction {
     blockNumber: string;
