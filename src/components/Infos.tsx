@@ -10,13 +10,13 @@ export default function Infos({
     wallet: string;
     provider: ReturnType<Web3ReactHooks['useProvider']>;
 }) {
-    const [EtherBalance, setEtherBalance] = useState<BigNumber>();
+    const [EtherBalance, setEtherBalance] = useState<number>();
     useEffect(() => {
         const updateBalance = async () => {
             if (!wallet || !provider) return;
             const balance = await provider.getBalance(wallet);
             console.log(balance);
-            setEtherBalance(balance);
+            setEtherBalance(balance as unknown as number);
         };
         updateBalance();
     }, [wallet]);
