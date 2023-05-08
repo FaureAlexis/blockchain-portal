@@ -18,7 +18,6 @@ export default function Home() {
   const accounts = useAccounts();
   const provider = useProvider();
   const [error, setError] = useState(undefined);
-
   const connectWallet = async () => {
     await metaMask.activate().then(() => setError(undefined)).catch(setError);
     if (error) {

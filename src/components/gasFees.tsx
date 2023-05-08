@@ -1,8 +1,7 @@
+'use client';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Card } from "@chakra-ui/react";
-
-const apiKey = process.env.API_KEY;
 
 interface IGasFees {
     LastBlock: string;
@@ -13,8 +12,11 @@ interface IGasFees {
 
 export default function GasFees() {
     const [GasFees, setGasFees] = useState<IGasFees>();
+    const [LastGasFees, setLastGasFees] = useState<IGasFees>();
+    const apiKey = process.env.API_KEY;
 
     const getGasFees = async () => {
+        if (GasFees) setLastGasFees(GasFees);
         const response = await axios
             .get("https://api.etherscan.io/api", {
                 params: {
@@ -29,12 +31,15 @@ export default function GasFees() {
 
     useEffect(() => {
         getGasFees();
-    }, []);
+        setInterval(() => {
+            getGasFees();
+        }, 1e3 * 30);
+    }, [])
 
     return (
-        <Card p="5" m="10">
+        <Card p="5" m="10" className="bg-gray-600">
             <h1>⛽ Gas Fees</h1>
-            <span className="text-center">{GasFees?.ProposeGasPrice}</span>
+            <span className="text-center">{GasFees ? GasFees.ProposeGasPrice : LastGasFees?.ProposeGasPrice}</span>
         </Card>
     )
 }
