@@ -15,7 +15,6 @@ export default function Infos({
         const updateBalance = async () => {
             if (!wallet || !provider) return;
             const balance = await provider.getBalance(wallet);
-            console.log(balance);
             setEtherBalance(balance as unknown as number);
         };
         updateBalance();
